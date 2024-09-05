@@ -1,0 +1,37 @@
+def bfs(graph, start):
+    visited = set()  # Set to keep track of visited nodes
+    queue = deque([start])  # Initialize the queue with the start node
+
+    while queue:
+        vertex = queue.popleft()  # Dequeue a vertex from the queue
+
+        if vertex not in visited:
+            print(vertex, end=" ")  # Print the visited node
+            visited.add(vertex)  # Mark the node as visited
+
+            # Enqueue all adjacent nodes that haven't been visited
+            for neighbor in graph[vertex]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+# Function to take graph input from the user
+def get_graph_input():
+    graph = {}
+    num_nodes = int(input("Enter the number of nodes: "))
+    
+    for i in range(num_nodes):
+        node = input(f"Enter the node name for node {i + 1}: ")
+        neighbors = input(f"Enter the neighbors of {node} separated by spaces: ").split()
+        graph[node] = neighbors
+    
+    return graph
+
+# User input for graph
+graph = get_graph_input()
+
+# User input for starting node
+start_node = input("Enter the starting node: ")
+
+# Perform BFS
+print("\nBFS traversal starting from node", start_node, ":")
+bfs(graph, start_node)
