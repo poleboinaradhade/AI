@@ -1,0 +1,23 @@
+# Import the necessary libraries
+from keras.models import Sequential
+from keras.layers import Dense
+
+# Define the number of inputs, hidden units, and outputs
+n_inputs = 784
+n_hidden = 256
+n_outputs = 10
+
+# Create the model
+model = Sequential()
+model.add(Dense(n_hidden, activation='relu', input_shape=(n_inputs,)))
+model.add(Dense(n_outputs, activation='softmax'))
+
+# Compile the model
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+# Train the model
+model.fit(X_train, y_train, epochs=10, batch_size=128)
+
+# Evaluate the model
+loss, accuracy = model.evaluate(X_test, y_test)
+print(f'Loss: {loss}, Accuracy: {accuracy}')
